@@ -13,7 +13,12 @@ API_URL = "https://en.wikipedia.org/api/rest_v1/page/random/summary"
 def main():
     """The hypermodern Python project."""
     with requests.get(API_URL) as response:
-        response.raise_for_status()
+        try:
+            response.raise_for_status()
+        except requests.HTTPError:
+            click.echo("Wikipedia API is unavailable.\n"
+                       "Please check your connection and try again")
+            return
         data = response.json()
 
     title = data["title"]
