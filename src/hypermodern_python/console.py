@@ -28,7 +28,7 @@ def main(lang):
         except requests.HTTPError:
             click.echo("Wikipedia API is unavailable.\n"
                        "Please check your connection and try again")
-            return
+            return 1
         data = response.json()
 
     title = data["title"]
