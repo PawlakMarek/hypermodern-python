@@ -41,3 +41,9 @@ def test_main_uses_local_wikipedia_org(runner, mock_requests_get):
     args, _ = mock_requests_get.call_args
     lang, _ = locale.getdefaultlocale()
     assert "{lang}.wikipedia.org".format(lang=lang[0:2]) in args[0]
+
+
+def test_main_fails_on_request_error(runner, mock_requests_get):
+    mock_requests_get.side_effect = Exception("BOOM")
+    result = runner.invoke(console.main)
+    assert result.exit_code == 1
