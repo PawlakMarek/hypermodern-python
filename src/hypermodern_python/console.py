@@ -23,7 +23,7 @@ def main(lang):
                              API_URL)) as response:
         try:
             response.raise_for_status()
-        except requests.HTTPError:
+        except requests.exceptions.RequestException:
             click.echo("Wikipedia API is unavailable.\n"
                        "Please check your connection and try again")
             return 1
