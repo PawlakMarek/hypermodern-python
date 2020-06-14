@@ -8,8 +8,6 @@ import requests
 from . import __version__
 
 language_code = locale.getdefaultlocale()[0][0:2]
-if language_code is None:
-    language_code = 'en'
 API_URL = "https://{}.wikipedia.org/api/rest_v1/page/random/summary".format(
     language_code)
 
